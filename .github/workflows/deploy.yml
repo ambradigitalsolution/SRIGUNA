@@ -1,0 +1,29 @@
+name: Deploy to Hosting via FTP
+
+on:
+  push:
+    branches:
+      - main # Akan berjalan setiap kali ada push ke branch main
+
+jobs:
+  deploy:
+    name: Deploy Theme to Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Jika akun FTP yang Anda buat aksesnya sudah langsung mengarah ke folder tema LPSRIGUNA, biarkan './'
+          server-dir: ./
+          # Mengecualikan folder/file git agar tidak ikut diupload
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            README.md
