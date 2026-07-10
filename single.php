@@ -81,13 +81,64 @@
 .post-content p {
     margin-bottom: 20px;
 }
+}
+.blog-2col-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+.blog-main-content {
+    flex: 1;
+    min-width: 0;
+}
+.blog-right-sidebar {
+    width: 380px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 130px;
+}
+@media (max-width: 992px) {
+    .blog-2col-layout {
+        flex-direction: column;
+    }
+    .blog-right-sidebar {
+        width: 100%;
+        position: static;
+        margin-top: 50px;
+    }
+}
+.sidebar-article-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+.sidebar-article-item img {
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.sidebar-article-info h4 {
+    font-size: 1rem;
+    color: #111;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+.sidebar-article-item:hover .sidebar-article-info h4 {
+    color: var(--primary-500);
+}
 </style>
 
+
 <div class="blog-page-container" style="padding-top: 130px; padding-bottom: 100px; background-color: #ffffff;">
-    <div class="container" style="max-width: 800px; margin: 0 auto; width: 100%;">
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            
-            <article class="single-post-article">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; width: 100%;">
+        <div class="blog-2col-layout">
+            <div class="blog-main-content">
+                <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                    
+                    <article class="single-post-article">
                 <!-- Traveloka Style Breadcrumbs -->
                 <nav class="sriguna-breadcrumbs" aria-label="breadcrumb" style="margin-bottom: 25px; font-size: 0.95rem; color: #666; font-weight: 600; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-bolt" style="color: #444;"></i>
@@ -143,57 +194,6 @@
 
 
                 
-                <!-- Related Posts -->
-                <?php
-                $categories = get_the_category();
-                $my_query = null;
-                
-                if ($categories) {
-                    $category_ids = array();
-                    foreach($categories as $individual_category) $category_ids[] = $individual_category->term_id;
-                    $args = array(
-                        'category__in' => $category_ids,
-                        'post__not_in' => array(get_the_ID()),
-                        'posts_per_page' => 2, // 2 articles
-                        'ignore_sticky_posts' => 1
-                    );
-                    $my_query = new wp_query( $args );
-                }
-                
-                // Fallback: Jika tidak ada artikel di kategori yang sama, ambil artikel terbaru apa saja
-                if ( !$my_query || !$my_query->have_posts() ) {
-                    $args = array(
-                        'post__not_in' => array(get_the_ID()),
-                        'posts_per_page' => 2,
-                        'ignore_sticky_posts' => 1
-                    );
-                    $my_query = new wp_query( $args );
-                }
-
-                if( $my_query->have_posts() ) {
-                    echo '<div class="related-posts-section" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #eaeaea;">';
-                    echo '<h3 style="font-size: 1.5rem; margin-bottom: 25px; font-weight: 800; color: #111;">Baca Juga:</h3>';
-                    echo '<div style="display: flex; gap: 20px; flex-wrap: wrap;">';
-                    while( $my_query->have_posts() ) {
-                        $my_query->the_post();
-                        ?>
-                        <a href="<?php the_permalink(); ?>" class="related-post-card" style="flex: 1; min-width: 250px; background: #fff; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform 0.3s ease;">
-                            <?php if ( has_post_thumbnail() ) : ?>
-                                <div style="height: 180px; overflow: hidden;">
-                                    <?php the_post_thumbnail('medium', ['style' => 'width: 100%; height: 100%; object-fit: cover;']); ?>
-                                </div>
-                            <?php endif; ?>
-                            <div style="padding: 20px;">
-                                <h4 style="margin: 0; font-size: 1.1rem; color: #111; line-height: 1.4; font-weight: 700;"><?php echo wp_trim_words(get_the_title(), 8, '...'); ?></h4>
-                            </div>
-                        </a>
-                        <?php
-                    }
-                    echo '</div></div>';
-                    wp_reset_query();
-                }
-                ?>
-                
             </article>
             
             <!-- Post Navigation (Prev/Next) -->
@@ -218,7 +218,51 @@
             </div>
 
         <?php endwhile; endif; ?>
-    </div>
-</div>
+        
+            </div> <!-- End blog-main-content -->
+            
+            <!-- Right Sidebar -->
+            <aside class="blog-right-sidebar">
+                <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: #111; padding-bottom: 15px; border-bottom: 1px solid #eaeaea;">Rekomendasi Artikel Lainnya</h3>
+                
+                <form role="search" method="get" style="margin-bottom: 30px; position: relative;" action="<?php echo esc_url(home_url('/')); ?>">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                    <input type="search" name="s" placeholder="Search" style="width: 100%; padding: 12px 15px 12px 45px; border: 1px solid #ddd; border-radius: 8px; outline: none; font-size: 1rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='#007bff'" onblur="this.style.borderColor='#ddd'" />
+                </form>
+
+                <div class="sidebar-articles-list">
+                    <?php
+                    $sidebar_args = array(
+                        'post_type' => 'post',
+                        'posts_per_page' => 5,
+                        'post__not_in' => array(get_the_ID()),
+                        'post_status' => 'publish',
+                    );
+                    $sidebar_query = new WP_Query($sidebar_args);
+                    if ($sidebar_query->have_posts()) :
+                        while ($sidebar_query->have_posts()) : $sidebar_query->the_post();
+                    ?>
+                        <a href="<?php echo get_permalink(); ?>" class="sidebar-article-item">
+                            <?php if ( has_post_thumbnail() ) : ?>
+                                <?php the_post_thumbnail('thumbnail'); ?>
+                            <?php else: ?>
+                                <div style="width: 90px; height: 90px; border-radius: 8px; background: #f1f3f5; display: flex; align-items: center; justify-content: center; color: #ccc; flex-shrink: 0;"><i class="fa-solid fa-image" style="font-size: 1.5rem;"></i></div>
+                            <?php endif; ?>
+                            <div class="sidebar-article-info">
+                                <h4><?php echo wp_trim_words(get_the_title(), 8, '...'); ?></h4>
+                                <div style="font-size: 0.85rem; color: #777;"><?php echo get_the_date('d M Y'); ?> &middot; <?php echo ceil(str_word_count(strip_tags(get_the_content())) / 200); ?> mnt</div>
+                            </div>
+                        </a>
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    endif;
+                    ?>
+                </div>
+            </aside> <!-- End blog-right-sidebar -->
+            
+        </div> <!-- End blog-2col-layout -->
+    </div> <!-- End container -->
+</div> <!-- End blog-page-container -->
 
 <?php get_footer(); ?>
