@@ -81,7 +81,6 @@
 .post-content p {
     margin-bottom: 20px;
 }
-}
 .blog-2col-layout {
     display: flex;
     gap: 40px;
