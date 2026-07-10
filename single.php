@@ -1,4 +1,4 @@
-﻿<?php get_header(); ?>
+<?php get_header(); ?>
 
 <div class="blog-page-container" style="padding-top: 130px; padding-bottom: 80px; background-color: #f8f9fa;">
     <div class="container">
@@ -9,12 +9,12 @@
                     <article class="single-post-card" style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
                         
                         <div class="blog-meta" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; display: flex; gap: 15px; align-items: center;">
-                            <span style="background: var(--primary-color); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold;"><?php the_category(', '); ?></span>
+                            <span style="background: var(--primary-500); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold;"><?php the_category(', '); ?></span>
                             <span><i class="fa-solid fa-user"></i> <?php the_author(); ?></span>
                             <span><i class="fa-solid fa-calendar-days"></i> <?php echo get_the_date(); ?></span>
                         </div>
                         
-                        <h1 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 25px; font-weight: 800; line-height: 1.3;"><?php the_title(); ?></h1>
+                        <h1 style="font-size: 2rem; color: var(--primary-600); margin-bottom: 25px; font-weight: 800; line-height: 1.3;"><?php the_title(); ?></h1>
                         
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div style="margin-bottom: 30px;">
