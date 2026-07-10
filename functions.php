@@ -342,3 +342,32 @@ function sriguna_body_classes( $classes ) {
     return $classes;
 }
 add_filter( 'body_class', 'sriguna_body_classes' );
+
+/**
+ * Automatically inject "Baca Juga" (Related Post) into article content
+ */
+function sriguna_inline_related_post( $content ) {
+    if ( is_single() && in_the_loop() && is_main_query() ) {
+        $prev_post = get_previous_post();
+        if ( !empty($prev_post) ) {
+            $related_link = '<div style="margin: 35px 0; padding: 18px 24px; background-color: #f8f9fa; border-left: 5px solid #007bff; border-radius: 6px;">';
+            $related_link .= '<strong style="color: #111; font-size: 1.15rem; font-family: Inter, sans-serif;">Baca Juga: <a href="' . esc_url(get_permalink($prev_post->ID)) . '" style="color: #007bff; text-decoration: none; border-bottom: 1px solid #007bff; padding-bottom: 2px;">' . esc_html(get_the_title($prev_post->ID)) . '</a></strong>';
+            $related_link .= '</div>';
+            
+            // Split content by paragraphs
+            $paragraphs = explode( '</p>', $content );
+            $count = count( $paragraphs );
+            
+            if ( $count > 3 ) {
+                // Insert after 2nd paragraph (array_splice at index 2)
+                array_splice( $paragraphs, 2, 0, $related_link );
+                $content = implode( '</p>', $paragraphs );
+            } else {
+                // Append at the end if the article is very short
+                $content .= $related_link;
+            }
+        }
+    }
+    return $content;
+}
+add_filter( 'the_content', 'sriguna_inline_related_post' );
