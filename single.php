@@ -141,17 +141,7 @@
                     <?php the_content(); ?>
                 </div>
 
-                <!-- Tags Section -->
-                <?php 
-                $tags = get_the_tags();
-                if($tags) : ?>
-                <div class="post-tags" style="margin-top: 50px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
-                    <span style="font-weight: 700; font-size: 1rem; color: #111; margin-right: 5px;">Tags:</span>
-                    <?php foreach($tags as $tag): ?>
-                        <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></a>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
+
                 
                 <!-- Related Posts -->
                 <?php
