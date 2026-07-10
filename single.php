@@ -146,6 +146,8 @@
                 <!-- Related Posts -->
                 <?php
                 $categories = get_the_category();
+                $my_query = null;
+                
                 if ($categories) {
                     $category_ids = array();
                     foreach($categories as $individual_category) $category_ids[] = $individual_category->term_id;
@@ -156,28 +158,39 @@
                         'ignore_sticky_posts' => 1
                     );
                     $my_query = new wp_query( $args );
-                    if( $my_query->have_posts() ) {
-                        echo '<div class="related-posts-section" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #eaeaea;">';
-                        echo '<h3 style="font-size: 1.5rem; margin-bottom: 25px; font-weight: 800; color: #111;">Baca Juga:</h3>';
-                        echo '<div style="display: flex; gap: 20px; flex-wrap: wrap;">';
-                        while( $my_query->have_posts() ) {
-                            $my_query->the_post();
-                            ?>
-                            <a href="<?php the_permalink(); ?>" class="related-post-card" style="flex: 1; min-width: 250px; background: #fff; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform 0.3s ease;">
-                                <?php if ( has_post_thumbnail() ) : ?>
-                                    <div style="height: 180px; overflow: hidden;">
-                                        <?php the_post_thumbnail('medium', ['style' => 'width: 100%; height: 100%; object-fit: cover;']); ?>
-                                    </div>
-                                <?php endif; ?>
-                                <div style="padding: 20px;">
-                                    <h4 style="margin: 0; font-size: 1.1rem; color: #111; line-height: 1.4; font-weight: 700;"><?php echo wp_trim_words(get_the_title(), 8, '...'); ?></h4>
+                }
+                
+                // Fallback: Jika tidak ada artikel di kategori yang sama, ambil artikel terbaru apa saja
+                if ( !$my_query || !$my_query->have_posts() ) {
+                    $args = array(
+                        'post__not_in' => array(get_the_ID()),
+                        'posts_per_page' => 2,
+                        'ignore_sticky_posts' => 1
+                    );
+                    $my_query = new wp_query( $args );
+                }
+
+                if( $my_query->have_posts() ) {
+                    echo '<div class="related-posts-section" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #eaeaea;">';
+                    echo '<h3 style="font-size: 1.5rem; margin-bottom: 25px; font-weight: 800; color: #111;">Baca Juga:</h3>';
+                    echo '<div style="display: flex; gap: 20px; flex-wrap: wrap;">';
+                    while( $my_query->have_posts() ) {
+                        $my_query->the_post();
+                        ?>
+                        <a href="<?php the_permalink(); ?>" class="related-post-card" style="flex: 1; min-width: 250px; background: #fff; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform 0.3s ease;">
+                            <?php if ( has_post_thumbnail() ) : ?>
+                                <div style="height: 180px; overflow: hidden;">
+                                    <?php the_post_thumbnail('medium', ['style' => 'width: 100%; height: 100%; object-fit: cover;']); ?>
                                 </div>
-                            </a>
-                            <?php
-                        }
-                        echo '</div></div>';
-                        wp_reset_query();
+                            <?php endif; ?>
+                            <div style="padding: 20px;">
+                                <h4 style="margin: 0; font-size: 1.1rem; color: #111; line-height: 1.4; font-weight: 700;"><?php echo wp_trim_words(get_the_title(), 8, '...'); ?></h4>
+                            </div>
+                        </a>
+                        <?php
                     }
+                    echo '</div></div>';
+                    wp_reset_query();
                 }
                 ?>
                 
