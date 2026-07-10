@@ -105,8 +105,8 @@
                         
                         <!-- Author Box -->
                         <div class="author-box" style="margin-top: 40px; padding: 25px; background: #f8f9fa; border-radius: 8px; display: flex; gap: 20px; align-items: flex-start;">
-                            <div class="author-avatar" style="flex-shrink: 0;">
-                                <?php echo get_avatar( get_the_author_meta('ID'), 60, '', '', ['style' => 'border-radius: 50%;'] ); ?>
+                            <div class="author-avatar" style="flex-shrink: 0; width: 60px; height: 60px; background: var(--primary-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 10px rgba(30, 136, 229, 0.2);">
+                                <i class="fa-solid fa-user-pen"></i>
                             </div>
                             <div class="author-info">
                                 <h4 style="margin: 0 0 10px 0; font-size: 1.2rem;"><?php the_author(); ?></h4>
