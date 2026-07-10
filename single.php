@@ -1,5 +1,61 @@
 <?php get_header(); ?>
 
+<style>
+.post-tags a {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #f1f3f5;
+    color: #444;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.post-tags a:hover {
+    background: var(--primary-500);
+    color: #fff;
+}
+.post-nav-card {
+    flex: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+.post-nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.post-nav-card .nav-label {
+    color: var(--primary-500);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.post-nav-card .nav-title {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.4;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.post-nav-card:hover .nav-title {
+    color: var(--primary-500);
+}
+@media (max-width: 768px) {
+    .post-navigation {
+        flex-direction: column;
+    }
+}
+</style>
+
 <div class="blog-page-container" style="padding-top: 130px; padding-bottom: 80px; background-color: #f8f9fa;">
     <div class="container">
         <div class="blog-layout">
@@ -36,9 +92,14 @@
                         </div>
                         
                         <!-- Tags Section -->
-                        <?php if(has_tag()) : ?>
-                        <div class="post-tags" style="margin-top: 20px;">
-                            <?php the_tags('<span style="font-weight: bold; margin-right: 10px;">Tags:</span> <span style="display:inline-block; padding:3px 10px; background:#f1f1f1; border-radius:4px; font-size:0.85rem; margin-right:5px;">', '</span> <span style="display:inline-block; padding:3px 10px; background:#f1f1f1; border-radius:4px; font-size:0.85rem; margin-right:5px;">', '</span>'); ?>
+                        <?php 
+                        $tags = get_the_tags();
+                        if($tags) : ?>
+                        <div class="post-tags" style="margin-top: 35px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <span style="font-weight: bold; font-size: 1rem; color: #333; margin-right: 5px;">Tags:</span>
+                            <?php foreach($tags as $tag): ?>
+                                <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"><?php echo esc_html($tag->name); ?></a>
+                            <?php endforeach; ?>
                         </div>
                         <?php endif; ?>
                         
@@ -61,15 +122,24 @@
                     </article>
                     
                     <!-- Post Navigation (Prev/Next) -->
-                    <div class="post-navigation" style="margin-top: 30px; display: flex; justify-content: space-between; gap: 20px;">
-                        <div class="nav-prev" style="flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.03);">
-                            <span style="color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-arrow-left"></i> Artikel Sebelumnya</span>
-                            <div style="margin-top: 10px; font-weight: bold;"><?php previous_post_link('%link', '%title'); ?></div>
-                        </div>
-                        <div class="nav-next" style="flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.03); text-align: right;">
-                            <span style="color: #888; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Artikel Selanjutnya <i class="fa-solid fa-arrow-right"></i></span>
-                            <div style="margin-top: 10px; font-weight: bold;"><?php next_post_link('%link', '%title'); ?></div>
-                        </div>
+                    <div class="post-navigation" style="margin-top: 40px; display: flex; justify-content: space-between; gap: 20px;">
+                        <?php $prev_post = get_previous_post(); if (!empty($prev_post)): ?>
+                            <a href="<?php echo get_permalink($prev_post->ID); ?>" class="post-nav-card" style="text-align: left;">
+                                <span class="nav-label"><i class="fa-solid fa-arrow-left"></i> Sebelumnya</span>
+                                <h4 class="nav-title"><?php echo get_the_title($prev_post->ID); ?></h4>
+                            </a>
+                        <?php else: ?>
+                            <div style="flex: 1;"></div>
+                        <?php endif; ?>
+
+                        <?php $next_post = get_next_post(); if (!empty($next_post)): ?>
+                            <a href="<?php echo get_permalink($next_post->ID); ?>" class="post-nav-card" style="text-align: right;">
+                                <span class="nav-label">Selanjutnya <i class="fa-solid fa-arrow-right"></i></span>
+                                <h4 class="nav-title"><?php echo get_the_title($next_post->ID); ?></h4>
+                            </a>
+                        <?php else: ?>
+                            <div style="flex: 1;"></div>
+                        <?php endif; ?>
                     </div>
 
 
