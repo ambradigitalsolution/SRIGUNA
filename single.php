@@ -54,6 +54,33 @@
         flex-direction: column;
     }
 }
+.related-post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+.post-content h2 {
+    font-size: 1.7rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--primary-600);
+    font-weight: 700;
+}
+.post-content h3 {
+    font-size: 1.4rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+}
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+.post-content p {
+    margin-bottom: 20px;
+}
 </style>
 
 <div class="blog-page-container" style="padding-top: 130px; padding-bottom: 80px; background-color: #f8f9fa;">
@@ -62,8 +89,26 @@
             <!-- Main Content Area -->
             <div class="blog-main">
                 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                    
+                    <!-- Breadcrumbs -->
+                    <nav class="sriguna-breadcrumbs" aria-label="breadcrumb" style="margin-bottom: 20px; font-size: 0.9rem; color: #6c757d;">
+                        <a href="<?php echo esc_url(home_url('/')); ?>" style="color: var(--primary-500); text-decoration: none;"><i class="fa-solid fa-house"></i> Beranda</a>
+                        <span style="margin: 0 8px;">/</span>
+                        <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" style="color: var(--primary-500); text-decoration: none;">Blog</a>
+                        <span style="margin: 0 8px;">/</span>
+                        <?php 
+                            $categories = get_the_category();
+                            if (!empty($categories)) {
+                                echo '<a href="' . esc_url(get_category_link($categories[0]->term_id)) . '" style="color: var(--primary-500); text-decoration: none;">' . esc_html($categories[0]->name) . '</a>';
+                                echo '<span style="margin: 0 8px;">/</span>';
+                            }
+                        ?>
+                        <span style="color: #333; font-weight: 500;"><?php echo wp_trim_words(get_the_title(), 5, '...'); ?></span>
+                    </nav>
+
                     <article class="single-post-card" style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
                         
+                        <div class="article-inner-container" style="max-width: 800px; margin: 0 auto;">
                         <div class="blog-meta" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; display: flex; gap: 15px; align-items: center;">
                             <span style="background: var(--primary-500); color: white; padding: 4px 10px; border-radius: 4px; font-weight: bold;"><?php the_category(', '); ?></span>
                             <span><i class="fa-solid fa-user"></i> <?php the_author(); ?></span>
@@ -78,7 +123,7 @@
                             </div>
                         <?php endif; ?>
                         
-                        <div class="post-content" style="line-height: 1.8; font-size: 1rem; color: #444;">
+                        <div class="post-content" style="line-height: 1.8; font-size: 1.05rem; color: #333;">
                             <?php the_content(); ?>
                         </div>
                         
@@ -103,6 +148,44 @@
                         </div>
                         <?php endif; ?>
                         
+                        <!-- Related Posts -->
+                        <?php
+                        $categories = get_the_category();
+                        if ($categories) {
+                            $category_ids = array();
+                            foreach($categories as $individual_category) $category_ids[] = $individual_category->term_id;
+                            $args = array(
+                                'category__in' => $category_ids,
+                                'post__not_in' => array(get_the_ID()),
+                                'posts_per_page' => 2, // 2 articles
+                                'ignore_sticky_posts' => 1
+                            );
+                            $my_query = new wp_query( $args );
+                            if( $my_query->have_posts() ) {
+                                echo '<div class="related-posts-section" style="margin-top: 50px; padding-top: 30px; border-top: 1px solid #eee;">';
+                                echo '<h3 style="font-size: 1.4rem; margin-bottom: 25px; font-weight: 700; color: #333;">Baca Juga:</h3>';
+                                echo '<div style="display: flex; gap: 20px; flex-wrap: wrap;">';
+                                while( $my_query->have_posts() ) {
+                                    $my_query->the_post();
+                                    ?>
+                                    <a href="<?php the_permalink(); ?>" class="related-post-card" style="flex: 1; min-width: 250px; background: #fff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform 0.3s ease;">
+                                        <?php if ( has_post_thumbnail() ) : ?>
+                                            <div style="height: 160px; overflow: hidden;">
+                                                <?php the_post_thumbnail('medium', ['style' => 'width: 100%; height: 100%; object-fit: cover;']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div style="padding: 15px;">
+                                            <h4 style="margin: 0; font-size: 1.05rem; color: #222; line-height: 1.4; font-weight: 600;"><?php echo wp_trim_words(get_the_title(), 8, '...'); ?></h4>
+                                        </div>
+                                    </a>
+                                    <?php
+                                }
+                                echo '</div></div>';
+                                wp_reset_query();
+                            }
+                        }
+                        ?>
+                        
                         <!-- Author Box -->
                         <div class="author-box" style="margin-top: 40px; padding: 25px; background: #f8f9fa; border-radius: 8px; display: flex; gap: 20px; align-items: flex-start;">
                             <div class="author-avatar" style="flex-shrink: 0; width: 60px; height: 60px; background: var(--primary-500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 10px rgba(30, 136, 229, 0.2);">
@@ -118,6 +201,8 @@
                                 </p>
                             </div>
                         </div>
+                        
+                        </div> <!-- End of article-inner-container -->
                         
                     </article>
                     
