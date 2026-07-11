@@ -3,7 +3,7 @@
 <style>
 /* Base Reset & Variables for Bento Grid */
 :root {
-    --bento-gap: 20px;
+    --bento-gap: 25px;
     --bento-radius: 24px;
     --bento-border: 1px solid rgba(0,0,0,0.06);
 }
@@ -23,118 +23,89 @@
     color: #fff;
 }
 
-/* Bento Hero Layout */
-.bento-hero {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: var(--bento-gap);
-    margin-bottom: 50px;
-}
-
-.bento-item {
-    background: #fff;
+/* Bento Box General Style */
+.bento-box {
+    background: #ffffff;
     border-radius: var(--bento-radius);
     padding: 30px;
     border: var(--bento-border);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.03);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+    margin-bottom: var(--bento-gap);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
     overflow: hidden;
+    position: relative;
 }
-
-.bento-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+.bento-box:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
-
-/* Specific Bento Items */
-.bento-thumbnail {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
+.bento-box.no-padding {
     padding: 0;
-    min-height: 400px;
-    background: #f8f9fa;
-}
-.bento-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.bento-thumbnail:hover img {
-    transform: scale(1.04);
 }
 
-.bento-title {
-    grid-column: 2 / 4;
-    grid-row: 1 / 2;
-    justify-content: center;
-    background: linear-gradient(145deg, #ffffff, #fcfcfc);
+/* Layout 2 Kolom */
+.blog-2col-layout {
+    display: flex;
+    gap: var(--bento-gap);
+    align-items: flex-start;
 }
-.bento-title h1 {
-    font-size: 2.2rem;
+.blog-main-content {
+    flex: 1;
+    min-width: 0;
+}
+.blog-right-sidebar {
+    width: 360px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 130px;
+}
+
+@media (max-width: 992px) {
+    .blog-2col-layout {
+        flex-direction: column;
+    }
+    .blog-right-sidebar {
+        width: 100%;
+        position: static;
+        margin-top: 20px;
+    }
+}
+
+/* Kiri: Bento Hero (Judul & Meta) */
+.bento-hero-header {
+    margin-bottom: 25px;
+}
+.bento-hero-header h1 {
+    font-size: 2.4rem;
     font-weight: 800;
-    line-height: 1.3;
+    line-height: 1.25;
     color: #111;
     margin: 15px 0 0 0;
     letter-spacing: -0.5px;
 }
-
-.bento-meta {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    justify-content: center;
-}
-
-.bento-social {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-    justify-content: center;
-}
-
-@media (max-width: 992px) {
-    .bento-hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-    }
-    .bento-thumbnail {
-        grid-column: 1 / -1;
-        grid-row: auto;
-        min-height: 250px;
-    }
-    .bento-title {
-        grid-column: 1 / -1;
-        grid-row: auto;
-    }
-    .bento-title h1 {
-        font-size: 1.8rem;
-    }
-    .bento-meta {
-        grid-column: 1 / -1;
-        grid-row: auto;
-    }
-    .bento-social {
-        grid-column: 1 / -1;
-        grid-row: auto;
-    }
-}
-
-/* Main Content Centered Area */
-.blog-focused-layout {
+.traveloka-meta-row {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-.blog-main-content {
+/* Kiri: Bento Thumbnail */
+.bento-thumbnail img {
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.bento-thumbnail:hover img {
+    transform: scale(1.02);
 }
 
+/* Kiri: Content Area */
 .post-content h2 {
     font-size: 1.7rem;
     margin-top: 40px;
@@ -173,279 +144,236 @@
     margin-bottom: 8px;
 }
 
-/* Post Navigation Styling */
+/* Kiri: Post Navigation */
+.post-navigation-bento {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
 .post-nav-card {
     flex: 1;
-    background: white;
-    padding: 25px;
+    padding: 20px;
     border-radius: 16px;
-    border: var(--bento-border);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #f8f9fa;
+    transition: background 0.3s ease;
     display: flex;
     flex-direction: column;
     text-decoration: none;
 }
 .post-nav-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    background: #f0f4f8;
 }
 .post-nav-card .nav-label {
     color: var(--primary-500);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 .post-nav-card .nav-title {
     margin: 0;
-    font-size: 1.1rem;
-    color: #333;
+    font-size: 1.05rem;
+    color: #111;
     line-height: 1.4;
     font-weight: 600;
-    transition: color 0.3s ease;
-}
-.post-nav-card:hover .nav-title {
-    color: var(--primary-500);
 }
 
 @media (max-width: 768px) {
-    .post-navigation {
+    .post-navigation-bento {
         flex-direction: column;
     }
 }
 
-/* Related Posts Bento */
-.related-posts-section {
-    margin-top: 80px;
-    padding-top: 50px;
-    border-top: 2px dashed #eaeaea;
-    width: 100%;
-}
-.bento-related {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--bento-gap);
-    margin-top: 30px;
-}
-.bento-related-item {
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    border: var(--bento-border);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-    text-decoration: none;
-    transition: all 0.3s ease;
+/* Kanan: Sidebar Articles */
+.sidebar-article-item {
     display: flex;
-    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-bottom: 5px;
 }
-.bento-related-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-}
-.bento-related-img {
-    height: 180px;
-    width: 100%;
-    position: relative;
+.sidebar-article-item:hover {
     background: #f8f9fa;
 }
-.bento-related-img img {
-    width: 100%;
-    height: 100%;
+.sidebar-article-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
     object-fit: cover;
-    transition: transform 0.5s ease;
 }
-.bento-related-item:hover .bento-related-img img {
-    transform: scale(1.05);
-}
-.bento-related-content {
-    padding: 20px;
+.sidebar-article-info {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    justify-content: center;
 }
-.bento-related-content h4 {
-    font-size: 1.15rem;
-    font-weight: 700;
+.sidebar-article-info h4 {
+    font-size: 1rem;
     color: #111;
-    margin: 0 0 12px 0;
+    margin: 0 0 6px 0;
     line-height: 1.4;
+    font-weight: 600;
     transition: color 0.2s;
 }
-.bento-related-item:hover .bento-related-content h4 {
+.sidebar-article-item:hover .sidebar-article-info h4 {
     color: var(--primary-500);
-}
-.bento-related-meta {
-    margin-top: auto;
-    font-size: 0.85rem;
-    color: #777;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.sriguna-breadcrumbs a:hover {
-    color: var(--primary-500) !important;
 }
 </style>
 
 
-<div class="blog-page-container" style="padding-top: 130px; padding-bottom: 100px; background-color: #fafbfc;">
+<div class="blog-page-container" style="padding-top: 130px; padding-bottom: 100px; background-color: #f4f6f8;">
     <div class="container" style="max-width: 1200px; margin: 0 auto; width: 100%;">
-        <div class="blog-focused-layout">
+        
+        <div class="blog-2col-layout">
             
-            <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-                
-                <!-- BENTO HERO SECTION -->
-                <div class="bento-hero" style="width: 100%;">
+            <!-- KOLOM KIRI: MAIN CONTENT -->
+            <div class="blog-main-content">
+                <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
                     
-                    <!-- Box 1: Image -->
-                    <div class="bento-item bento-thumbnail">
-                        <?php if ( has_post_thumbnail() ) : ?>
-                            <?php the_post_thumbnail('large'); ?>
-                        <?php else: ?>
-                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #ccc;">
-                                <i class="fa-solid fa-image" style="font-size: 4rem;"></i>
+                    <article class="single-post-article">
+                        
+                        <!-- 1. BENTO HERO (Judul & Meta) -->
+                        <div class="bento-box">
+                            <div class="bento-hero-header">
+                                <!-- Breadcrumbs -->
+                                <nav class="sriguna-breadcrumbs" aria-label="breadcrumb" style="font-size: 0.9rem; color: #666; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                    <i class="fa-solid fa-bolt" style="color: #444;"></i>
+                                    <a href="<?php echo esc_url(home_url('/')); ?>" style="color: #444; text-decoration: none; transition: color 0.2s;">Sriguna</a>
+                                    <span style="color: #ccc;">/</span>
+                                    <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" style="color: #666; text-decoration: none; transition: color 0.2s;">Blog</a>
+                                    <span style="color: #ccc;">/</span>
+                                    <?php 
+                                        $categories = get_the_category();
+                                        if (!empty($categories)) {
+                                            echo '<a href="' . esc_url(get_category_link($categories[0]->term_id)) . '" style="color: #111; text-decoration: none; font-weight: 700; transition: color 0.2s;">' . esc_html($categories[0]->name) . '</a>';
+                                        }
+                                    ?>
+                                </nav>
+                                <!-- Judul -->
+                                <h1><?php the_title(); ?></h1>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                    
-                    <!-- Box 2: Title & Breadcrumbs -->
-                    <div class="bento-item bento-title">
-                        <nav class="sriguna-breadcrumbs" aria-label="breadcrumb" style="font-size: 0.9rem; color: #666; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                            <i class="fa-solid fa-bolt" style="color: #444;"></i>
-                            <a href="<?php echo esc_url(home_url('/')); ?>" style="color: #444; text-decoration: none; transition: color 0.2s;">Sriguna</a>
-                            <span style="color: #ccc;">/</span>
-                            <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" style="color: #666; text-decoration: none; transition: color 0.2s;">Blog</a>
-                            <span style="color: #ccc;">/</span>
-                            <?php 
-                                $categories = get_the_category();
-                                if (!empty($categories)) {
-                                    echo '<a href="' . esc_url(get_category_link($categories[0]->term_id)) . '" style="color: #111; text-decoration: none; font-weight: 700; transition: color 0.2s;">' . esc_html($categories[0]->name) . '</a>';
-                                }
-                            ?>
-                        </nav>
-                        <h1><?php the_title(); ?></h1>
-                    </div>
+                            
+                            <!-- Meta Row -->
+                            <div class="traveloka-meta-row">
+                                <div class="meta-left" style="display: flex; align-items: center; gap: 12px;">
+                                    <!-- Avatar -->
+                                    <div style="width: 45px; height: 45px; border-radius: 12px; background: #ffebeb; color: #ff5e5e; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </div>
+                                    <!-- Author & Date Info -->
+                                    <div style="font-size: 0.95rem; color: #777; display: flex; flex-direction: column; gap: 2px;">
+                                        <div><span style="color: #111; font-weight: 700; font-size: 1.05rem;"><?php the_author(); ?></span></div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-regular fa-calendar" style="color: #999;"></i> <?php echo get_the_date('d M Y'); ?> &middot; <?php echo ceil(str_word_count(strip_tags(get_the_content())) / 200); ?> mnt baca
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <!-- Box 3: Author & Meta -->
-                    <div class="bento-item bento-meta">
-                        <h3 style="font-size: 0.85rem; text-transform: uppercase; color: #888; margin: 0 0 15px 0; font-weight: 700; letter-spacing: 1px;">Ditulis Oleh</h3>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; border-radius: 12px; background: #ffebeb; color: #ff5e5e; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
-                                <i class="fa-solid fa-user-pen"></i>
-                            </div>
-                            <div style="font-size: 0.95rem; color: #666; display: flex; flex-direction: column; gap: 4px;">
-                                <div><span style="color: #111; font-weight: 700; font-size: 1.05rem;"><?php the_author(); ?></span></div>
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <i class="fa-regular fa-calendar" style="color: #999;"></i> <?php echo get_the_date('d M Y'); ?>
+                                <!-- Social Share -->
+                                <div class="meta-right" style="display: flex; gap: 10px;">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" style="width: 40px; height: 40px; border-radius: 10px; background: #e7f0ff; color: #1877F2; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s; font-size: 1.1rem;"><i class="fa-brands fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" style="width: 40px; height: 40px; border-radius: 10px; background: #eaf5fc; color: #1DA1F2; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s; font-size: 1.1rem;"><i class="fa-brands fa-twitter"></i></a>
+                                    <a href="https://wa.me/?text=<?php echo urlencode(get_the_title() . ' ' . get_permalink()); ?>" target="_blank" style="width: 40px; height: 40px; border-radius: 10px; background: #e6f9ed; color: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.2s; font-size: 1.2rem;"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Box 4: Share & Reading Time -->
-                    <div class="bento-item bento-social">
-                        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 600; color: #555;">
-                            <i class="fa-regular fa-clock" style="font-size: 1.2rem; color: var(--primary-500);"></i>
-                            Waktu baca ~<?php echo ceil(str_word_count(strip_tags(get_the_content())) / 200); ?> menit
-                        </div>
-                        <h3 style="font-size: 0.85rem; text-transform: uppercase; color: #888; margin: 0 0 12px 0; font-weight: 700; letter-spacing: 1px;">Bagikan</h3>
-                        <div style="display: flex; gap: 12px;">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" style="width: 42px; height: 42px; border-radius: 12px; background: #e7f0ff; color: #1877F2; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; font-size: 1.2rem;"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" style="width: 42px; height: 42px; border-radius: 12px; background: #eaf5fc; color: #1DA1F2; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; font-size: 1.2rem;"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="https://wa.me/?text=<?php echo urlencode(get_the_title() . ' ' . get_permalink()); ?>" target="_blank" style="width: 42px; height: 42px; border-radius: 12px; background: #e6f9ed; color: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; font-size: 1.3rem;"><i class="fa-brands fa-whatsapp"></i></a>
-                        </div>
-                    </div>
+                        <!-- 2. BENTO THUMBNAIL (Gambar Utama) -->
+                        <?php if ( has_post_thumbnail() ) : ?>
+                            <div class="bento-box no-padding bento-thumbnail">
+                                <?php the_post_thumbnail('large'); ?>
+                            </div>
+                        <?php endif; ?>
 
-                </div>
-                <!-- END BENTO HERO -->
-
-                <div class="blog-main-content">
-                    <article class="single-post-article">
-                        
-                        <!-- Content Area -->
-                        <div class="post-content">
-                            <?php the_content(); ?>
+                        <!-- 3. BENTO CONTENT (Isi Artikel) -->
+                        <div class="bento-box">
+                            <div class="post-content">
+                                <?php the_content(); ?>
+                            </div>
                         </div>
 
                     </article>
                     
-                    <!-- Post Navigation (Prev/Next) -->
-                    <div class="post-navigation" style="margin-top: 60px; display: flex; justify-content: space-between; gap: 25px;">
-                        <?php $prev_post = get_previous_post(); if (!empty($prev_post)): ?>
-                            <a href="<?php echo get_permalink($prev_post->ID); ?>" class="post-nav-card" style="text-align: left;">
-                                <span class="nav-label" style="color: #888; font-weight: 600; font-size: 0.85rem;"><i class="fa-solid fa-arrow-left"></i> Artikel Sebelumnya</span>
-                                <h4 class="nav-title" style="margin-top: 8px; font-weight: 700; color: #111;"><?php echo get_the_title($prev_post->ID); ?></h4>
-                            </a>
-                        <?php else: ?>
-                            <div style="flex: 1;"></div>
-                        <?php endif; ?>
+                    <!-- 4. BENTO NAVIGATION (Artikel Prev/Next) -->
+                    <div class="bento-box">
+                        <h3 style="font-size: 1.1rem; font-weight: 800; margin: 0 0 20px 0; color: #111;">Bacaan Selanjutnya</h3>
+                        <div class="post-navigation-bento">
+                            <?php $prev_post = get_previous_post(); if (!empty($prev_post)): ?>
+                                <a href="<?php echo get_permalink($prev_post->ID); ?>" class="post-nav-card" style="text-align: left;">
+                                    <span class="nav-label"><i class="fa-solid fa-arrow-left"></i> Sebelumnya</span>
+                                    <h4 class="nav-title"><?php echo get_the_title($prev_post->ID); ?></h4>
+                                </a>
+                            <?php else: ?>
+                                <div style="flex: 1;"></div>
+                            <?php endif; ?>
 
-                        <?php $next_post = get_next_post(); if (!empty($next_post)): ?>
-                            <a href="<?php echo get_permalink($next_post->ID); ?>" class="post-nav-card" style="text-align: right;">
-                                <span class="nav-label" style="color: #888; font-weight: 600; font-size: 0.85rem;">Artikel Selanjutnya <i class="fa-solid fa-arrow-right"></i></span>
-                                <h4 class="nav-title" style="margin-top: 8px; font-weight: 700; color: #111;"><?php echo get_the_title($next_post->ID); ?></h4>
-                            </a>
-                        <?php else: ?>
-                            <div style="flex: 1;"></div>
-                        <?php endif; ?>
+                            <?php $next_post = get_next_post(); if (!empty($next_post)): ?>
+                                <a href="<?php echo get_permalink($next_post->ID); ?>" class="post-nav-card" style="text-align: right;">
+                                    <span class="nav-label">Selanjutnya <i class="fa-solid fa-arrow-right"></i></span>
+                                    <h4 class="nav-title"><?php echo get_the_title($next_post->ID); ?></h4>
+                                </a>
+                            <?php else: ?>
+                                <div style="flex: 1;"></div>
+                            <?php endif; ?>
+                        </div>
                     </div>
 
-                </div> <!-- End blog-main-content -->
-
-            <?php endwhile; endif; ?>
+                <?php endwhile; endif; ?>
+            </div> <!-- End blog-main-content -->
             
-            <!-- RELATED POSTS BENTO SECTION -->
-            <div class="related-posts-section">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px;">
-                    <div>
-                        <h2 style="font-size: 2rem; font-weight: 800; color: #111; margin: 0; letter-spacing: -0.5px;">Eksplorasi Lanjut</h2>
-                        <p style="color: #666; margin: 8px 0 0 0; font-size: 1.1rem;">Rekomendasi bacaan menarik lainnya untuk Anda</p>
-                    </div>
+            <!-- KOLOM KANAN: SIDEBAR -->
+            <aside class="blog-right-sidebar">
+                
+                <!-- 5. BENTO SEARCH -->
+                <div class="bento-box" style="padding: 20px;">
+                    <form role="search" method="get" style="position: relative;" action="<?php echo esc_url(home_url('/')); ?>">
+                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                        <input type="search" name="s" placeholder="Cari artikel..." style="width: 100%; padding: 12px 15px 12px 45px; border: 1px solid #eaeaea; border-radius: 12px; outline: none; font-size: 0.95rem; background: #f8f9fa; transition: all 0.2s;" onfocus="this.style.background='#fff'; this.style.borderColor='#007bff'" onblur="this.style.background='#f8f9fa'; this.style.borderColor='#eaeaea'" />
+                    </form>
                 </div>
 
-                <div class="bento-related">
-                    <?php
-                    $sidebar_args = array(
-                        'post_type' => 'post',
-                        'posts_per_page' => 4,
-                        'post__not_in' => array(get_the_ID()),
-                        'post_status' => 'publish',
-                    );
-                    $sidebar_query = new WP_Query($sidebar_args);
-                    if ($sidebar_query->have_posts()) :
-                        while ($sidebar_query->have_posts()) : $sidebar_query->the_post();
-                    ?>
-                        <a href="<?php echo get_permalink(); ?>" class="bento-related-item">
-                            <div class="bento-related-img">
+                <!-- 6. BENTO SIDEBAR REKOMENDASI -->
+                <div class="bento-box" style="padding: 20px;">
+                    <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0 0 15px 0; color: #111; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;">Rekomendasi Artikel Lainnya</h3>
+                    
+                    <div class="sidebar-articles-list" style="margin-top: 15px;">
+                        <?php
+                        $sidebar_args = array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 5,
+                            'post__not_in' => array(get_the_ID()),
+                            'post_status' => 'publish',
+                        );
+                        $sidebar_query = new WP_Query($sidebar_args);
+                        if ($sidebar_query->have_posts()) :
+                            while ($sidebar_query->have_posts()) : $sidebar_query->the_post();
+                        ?>
+                            <a href="<?php echo get_permalink(); ?>" class="sidebar-article-item">
                                 <?php if ( has_post_thumbnail() ) : ?>
-                                    <?php the_post_thumbnail('medium'); ?>
+                                    <?php the_post_thumbnail('thumbnail'); ?>
                                 <?php else: ?>
-                                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #ccc;">
-                                        <i class="fa-solid fa-image" style="font-size: 2.5rem;"></i>
-                                    </div>
+                                    <div style="width: 80px; height: 80px; border-radius: 10px; background: #f1f3f5; display: flex; align-items: center; justify-content: center; color: #ccc; flex-shrink: 0;"><i class="fa-solid fa-image" style="font-size: 1.5rem;"></i></div>
                                 <?php endif; ?>
-                            </div>
-                            <div class="bento-related-content">
-                                <h4><?php echo wp_trim_words(get_the_title(), 10, '...'); ?></h4>
-                                <div class="bento-related-meta">
-                                    <span><i class="fa-regular fa-calendar"></i> <?php echo get_the_date('d M Y'); ?></span>
-                                    <span style="color: var(--primary-500); font-weight: 600; font-size: 0.8rem; padding: 4px 10px; background: #f0f7ff; border-radius: 20px;">
-                                        <?php echo ceil(str_word_count(strip_tags(get_the_content())) / 200); ?> mnt
-                                    </span>
+                                <div class="sidebar-article-info">
+                                    <h4><?php echo wp_trim_words(get_the_title(), 7, '...'); ?></h4>
+                                    <div style="font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 5px;">
+                                        <?php echo get_the_date('d M Y'); ?> &middot; Waktu baca <?php echo ceil(str_word_count(strip_tags(get_the_content())) / 200); ?> mnt
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    <?php
-                        endwhile;
-                        wp_reset_postdata();
-                    endif;
-                    ?>
-                </div>
-            </div> <!-- End related-posts-section -->
+                            </a>
+                        <?php
+                            endwhile;
+                            wp_reset_postdata();
+                        endif;
+                        ?>
+                    </div>
+                </div> <!-- End Bento Sidebar -->
+                
+            </aside> <!-- End blog-right-sidebar -->
             
-        </div> <!-- End blog-focused-layout -->
+        </div> <!-- End blog-2col-layout -->
     </div> <!-- End container -->
 </div> <!-- End blog-page-container -->
 
