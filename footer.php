@@ -34,7 +34,7 @@ $youtube   = sriguna_get( 'sriguna_social_youtube', '#' );
                 <a href="<?php echo esc_url( home_url( '/#beranda' ) ); ?>" class="footer-logo" aria-label="<?php esc_attr_e( 'Sriguna Computindo', 'sriguna' ); ?>">
                     <img src="<?php echo esc_url( SRIGUNA_URI . '/assets/images/logosriguna.png' ); ?>" alt="Sriguna Computindo" width="220" height="55">
                 </a>
-                <p>Penyedia perangkat bekas berkualitas dengan harga terbaik dan pelayanan terpercaya sejak hari pertama.</p>
+                <p>Spesialis Borongan Komputer, Laptop & Alat Kantor Bekas</p>
             </div>
 
             <!-- Menu Column -->

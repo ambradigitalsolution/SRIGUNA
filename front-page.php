@@ -38,7 +38,7 @@ $whatsapp       = '6287710111110';
 
             <!-- Description -->
             <p class="hero-desc">
-                Kami menerima komputer, laptop, serta perlengkapan IT dan alat kantor bekas dari perusahaan, instansi, sekolah, maupun pabrik dalam partai besar maupun lelang.
+                Kami menerima komputer, laptop, serta perlengkapan IT dan alat kantor bekas dari perusahaan, instansi, sekolah,dalam partai besar maupun lelang.
             </p>
 
             <!-- Trust Features -->
@@ -324,12 +324,12 @@ $whatsapp       = '6287710111110';
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         </div>
-                        <blockquote>"Laptop yang saya beli kondisinya mulus, baterai awet dan harga super bersaing. Pelayanan ramah dan fast response!"</blockquote>
+                        <blockquote>"Jual puluhan PC bekas kantor ke Sriguna prosesnya sangat mudah. Penilaian harganya fair dan pembayarannya langsung lunas. Sangat profesional!"</blockquote>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">RP</div>
                             <div class="testimonial-author-info">
                                 <h4>Rizky Pratama</h4>
-                                <p>Mahasiswa</p>
+                                <p>Manajer IT</p>
                             </div>
                         </div>
                     </div>
@@ -366,7 +366,7 @@ $whatsapp       = '6287710111110';
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         </div>
-                        <blockquote>"PC yang saya beli untuk kerja performanya mantap. Sriguna Computindo rekomendasi banget! Packing rapi dan aman."</blockquote>
+                        <blockquote>"Bongkaran server dan perangkat IT bekas dari pabrik kami diborong habis oleh Sriguna. Pelayanan cepat, tidak bertele-tele, dan harganya cocok."</blockquote>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">FN</div>
                             <div class="testimonial-author-info">
@@ -387,7 +387,7 @@ $whatsapp       = '6287710111110';
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         </div>
-                        <blockquote>"Monitor second yang saya beli ternyata masih sangat bagus. Warna jernih, no dead pixel. Terima kasih Sriguna!"</blockquote>
+                        <blockquote>"Jual laptop dan monitor bekas yang menumpuk ternyata gampang banget di Sriguna. Admin ramah, penawarannya juga lebih tinggi dibanding tempat lain."</blockquote>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">AS</div>
                             <div class="testimonial-author-info">
