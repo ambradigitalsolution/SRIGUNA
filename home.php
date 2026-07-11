@@ -76,7 +76,7 @@
 }
 .bento-post-img {
     width: 100%;
-    height: 320px;
+    aspect-ratio: 16 / 9;
     position: relative;
     background: #f8f9fa;
     overflow: hidden;
@@ -127,9 +127,7 @@
 }
 
 @media (max-width: 768px) {
-    .bento-post-img {
-        height: 220px;
-    }
+    /* Optional: adjust any other mobile layout here if needed */
 }
 
 /* Pagination Bento */
