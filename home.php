@@ -57,9 +57,10 @@
     }
 }
 
-/* Kiri: Daftar Artikel (Bento Horizontal) */
+/* Kiri: Daftar Artikel (Bento Vertikal) */
 .bento-post-card {
     display: flex;
+    flex-direction: column;
     background: #fff;
     border-radius: var(--bento-radius);
     overflow: hidden;
@@ -74,8 +75,8 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
 .bento-post-img {
-    width: 280px;
-    flex-shrink: 0;
+    width: 100%;
+    height: 320px;
     position: relative;
     background: #f8f9fa;
     overflow: hidden;
@@ -126,11 +127,7 @@
 }
 
 @media (max-width: 768px) {
-    .bento-post-card {
-        flex-direction: column;
-    }
     .bento-post-img {
-        width: 100%;
         height: 220px;
     }
 }
