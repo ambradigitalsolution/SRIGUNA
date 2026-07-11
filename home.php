@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <style>
 /* Bento Grid Variables */
 :root {
