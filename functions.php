@@ -389,3 +389,14 @@ function sriguna_inline_related_post( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'sriguna_inline_related_post' );
+
+/**
+ * Limit search results to posts only (exclude pages)
+ */
+function sriguna_search_filter( $query ) {
+    if ( $query->is_search && ! is_admin() && $query->is_main_query() ) {
+        $query->set( 'post_type', 'post' );
+    }
+    return $query;
+}
+add_filter( 'pre_get_posts', 'sriguna_search_filter' );
