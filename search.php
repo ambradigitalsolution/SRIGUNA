@@ -202,9 +202,6 @@
             <!-- KOLOM KIRI: MAIN CONTENT -->
             <div class="blog-main-content">
                 
-                <div class="bento-box" style="padding: 8px 15px; margin-bottom: 25px; background: #fff; border-left: 3px solid var(--primary-500);">
-                    <h1 style="font-size: 0.9rem; margin: 0; font-weight: 500; color: #333;">Hasil Pencarian: <span style="color: var(--primary-500);">"<?php echo get_search_query(); ?>"</span></h1>
-                </div>
 
                 <?php 
                 if ( have_posts() ) :
