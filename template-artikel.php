@@ -1,4 +1,9 @@
-<?php get_header(); ?>
+<?php
+/*
+Template Name: Template Detail Artikel
+Template Post Type: post, page
+*/
+get_header(); ?>
 
 <style>
 /* Base Reset & Variables for Bento Grid */

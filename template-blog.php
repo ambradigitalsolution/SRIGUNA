@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php
+/*
+Template Name: Template Halaman Blog
+*/
+get_header(); ?>
 
 <style>
 /* Base Reset & Variables for Bento Grid */
@@ -202,10 +206,6 @@
             <!-- KOLOM KIRI: MAIN CONTENT -->
             <div class="blog-main-content">
                 
-                <div class="bento-box" style="padding: 8px 15px; margin-bottom: 25px; background: #fff; border-left: 3px solid var(--primary-500);">
-                    <h1 style="font-size: 0.9rem; margin: 0; font-weight: 500; color: #333;">Hasil Pencarian: <span style="color: var(--primary-500);">"<?php echo get_search_query(); ?>"</span></h1>
-                </div>
-
                 <?php 
                 if ( have_posts() ) :
                     while ( have_posts() ) : the_post(); 
@@ -239,8 +239,7 @@
                 ?>
                     <div class="bento-box" style="text-align: center; padding: 50px;">
                         <i class="fa-solid fa-ghost" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
-                        <h3 style="color: #666; margin: 0;">Maaf, tidak ada artikel yang cocok dengan pencarian Anda.</h3>
-                        <p style="color: #888; margin-top: 10px;">Silakan coba dengan kata kunci lain.</p>
+                        <h3 style="color: #666; margin: 0;">Belum ada artikel yang diterbitkan.</h3>
                     </div>
                 <?php endif; ?>
 
@@ -314,3 +313,6 @@
 </div> <!-- End blog-page-container -->
 
 <?php get_footer(); ?>
+
+
+

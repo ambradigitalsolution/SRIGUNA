@@ -258,9 +258,11 @@
                 
                 <!-- BENTO SEARCH -->
                 <div class="bento-box" style="padding: 20px;">
-                    <form role="search" method="get" style="position: relative;" action="<?php echo esc_url(home_url('/')); ?>">
-                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999;"></i>
-                        <input type="search" name="s" placeholder="Cari artikel..." style="width: 100%; padding: 12px 15px 12px 45px; border: 1px solid #eaeaea; border-radius: 12px; outline: none; font-size: 0.95rem; background: #f8f9fa; transition: all 0.2s;" onfocus="this.style.background='#fff'; this.style.borderColor='#007bff'" onblur="this.style.background='#f8f9fa'; this.style.borderColor='#eaeaea'" />
+                    <form role="search" method="get" style="display: flex; position: relative;" action="<?php echo esc_url(home_url('/')); ?>">
+                        <input type="search" name="s" placeholder="Cari Artikel..." value="<?php echo get_search_query(); ?>" style="width: 100%; padding: 12px 15px; border: 1px solid #eaeaea; border-right: none; border-radius: 8px 0 0 8px; outline: none; font-size: 0.95rem; background: #fff; transition: all 0.2s;" onfocus="this.style.borderColor='#007bff'" onblur="this.style.borderColor='#eaeaea'" />
+                        <button type="submit" style="padding: 12px 20px; background-color: #007bff; color: white; border: 1px solid #007bff; border-radius: 0 8px 8px 0; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
                     </form>
                 </div>
 

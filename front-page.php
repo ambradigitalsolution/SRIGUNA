@@ -38,7 +38,7 @@ $whatsapp       = '6287710111110';
 
             <!-- Description -->
             <p class="hero-desc">
-                Kami menerima komputer, laptop, serta perlengkapan IT dan alat kantor bekas dari perusahaan, instansi, sekolah,dalam partai besar maupun lelang.
+                Kami menerima komputer, laptop, serta perlengkapan IT dan alat kantor bekas dari perusahaan, instansi, sekolah,dalam jumlah besar maupun lelang.
             </p>
 
             <!-- Trust Features -->
