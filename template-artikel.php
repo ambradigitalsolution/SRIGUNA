@@ -303,7 +303,6 @@ get_header(); ?>
                     
                     <!-- 4. BENTO NAVIGATION (Artikel Prev/Next) -->
                     <div class="bento-box">
-                        <h3 style="font-size: 1.1rem; font-weight: 800; margin: 0 0 20px 0; color: #111;">Baca juga:</h3>
                         <div class="post-navigation-bento">
                             <?php $prev_post = get_previous_post(); if (!empty($prev_post)): ?>
                                 <a href="<?php echo get_permalink($prev_post->ID); ?>" class="post-nav-card" style="text-align: left;">
